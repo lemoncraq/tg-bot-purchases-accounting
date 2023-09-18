@@ -9,16 +9,26 @@ class Bots:
 
 
 @dataclass
-class Connects:
+class ApiConnects:
     webapp_url: str
     api: str
     api_token: str
 
 
 @dataclass
+class DbConnects:
+    username: str
+    password: str
+    host: str
+    name: str
+    port: int
+
+
+@dataclass
 class Settings:
     bots: Bots
-    connects: Connects
+    api_connects: ApiConnects
+    db_connects: DbConnects
 
 
 def get_settings(path: str):
@@ -29,8 +39,12 @@ def get_settings(path: str):
         bots=Bots(
             bot_token=env.str("TOKEN"), admin_id=env.int("ADMIN_ID")
         ),
-        connects=Connects(
-            webapp_url=env.str("WEBAPP_URL"), api=env.str("API"),api_token=env.str("API_TOKEN")
+        api_connects=ApiConnects(
+            webapp_url=env.str("WEBAPP_URL"), api=env.str("API"), api_token=env.str("API_TOKEN")
+        ),
+        db_connects=DbConnects(
+            username=env.str("USERNAME"), password=env.str("PASSWORD"),
+            host=env.str("HOST"), name=env.str("NAME"), port=env.int("PORT")
         )
     )
 

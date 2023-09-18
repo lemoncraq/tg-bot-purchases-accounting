@@ -11,7 +11,7 @@ class Product:
     quantity: float
 
 
-def check_request(data):
+def receipt_request(data):
     json_items = json.loads(requests.post(url=settings.connects.api,
                                           data=data).text)["data"]["json"]["items"]
     items = []
